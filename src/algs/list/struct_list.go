@@ -6,7 +6,7 @@ type ListNode struct {
 }
 
 func newListNode(arr []int) *ListNode {
-	init := ListNode{
+	init := &ListNode{
 		Val:  0,
 		Next: nil,
 	}
@@ -16,7 +16,7 @@ func newListNode(arr []int) *ListNode {
 			Val:  arr[i],
 			Next: nil,
 		}
-		tmp = *tmp.Next
+		tmp = tmp.Next
 	}
 	return init.Next
 }

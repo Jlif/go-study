@@ -1,5 +1,7 @@
 package data_structure
 
+import "strconv"
+
 type ListNode struct {
 	Val  int
 	Next *ListNode
@@ -27,4 +29,20 @@ func PrintListNode(node *ListNode) {
 		PrintListNode(node.Next)
 	}
 	println()
+}
+
+func GetListNodeStr(node *ListNode) string {
+	if node == nil {
+		return ""
+	}
+	str := strconv.Itoa(node.Val)
+	node = node.Next
+	for {
+		if node == nil {
+			break
+		}
+		str = str + "," + strconv.Itoa(node.Val)
+		node = node.Next
+	}
+	return str
 }

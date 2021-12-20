@@ -7,7 +7,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func NewListNode(arr []int) *ListNode {
+func NewListNodeFromArr(arr []int) *ListNode {
 	init := &ListNode{
 		Val:  0,
 		Next: nil,

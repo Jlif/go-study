@@ -5,12 +5,27 @@ import (
 )
 
 type ListNode = data_structure.ListNode
-type PQ = data_structure.PQ
+type PriorityQueue = data_structure.PriorityQueue
 
-func mergeKLists(lists []*ListNode) *ListNode {
-	pq := PQ{}
-	for i := 0; i < cap(lists); i++ {
+func mergeKSortedLists(lists []*ListNode) *ListNode {
+	if len(lists) == 0 {
+		return nil
+	}
+	dummy := ListNode{}
+	p := dummy
+	pq := PriorityQueue{}
+	for i := 0; i < len(lists); i++ {
 		pq.Push(lists[i])
 	}
-	return nil
+	for {
+		if len(pq) != 0 {
+			node := pq.Pop()
+			p.Next := *node
+			//if node.Next != nil {
+			//	pq.Push(node.Next)
+			//}
+			//p = *p.Next
+		}
+	}
+	return dummy.Next
 }

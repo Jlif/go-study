@@ -10,6 +10,6 @@ func TestMergeTwoSortedLists(t *testing.T) {
 	list2 := data_structure.NewListNodeFromArr([]int{2, 5, 8})
 	list3 := data_structure.NewListNodeFromArr([]int{3, 6, 9})
 	lists := []ListNode{*list1, *list2, *list3}
-	mergedList := mergeKSortedLists(&lists)
+	mergedList := mergeKSortedLists(lists)
 	println(data_structure.GetListNodeStr(mergedList))
 }

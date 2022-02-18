@@ -12,15 +12,15 @@ func mergeKSortedLists(lists []*ListNode) *ListNode {
 		return nil
 	}
 	dummy := ListNode{}
-	p := dummy
+	//p := dummy
 	pq := PriorityQueue{}
 	for i := 0; i < len(lists); i++ {
 		pq.Push(lists[i])
 	}
 	for {
 		if len(pq) != 0 {
-			node := pq.Pop()
-			p.Next := *node
+			//node := pq.Pop()
+			//p.Next = node
 			//if node.Next != nil {
 			//	pq.Push(node.Next)
 			//}

@@ -33,16 +33,19 @@ func PrintListNode(node *ListNode) {
 
 func GetListNodeStr(node *ListNode) string {
 	if node == nil {
-		return ""
+		return "{}"
 	}
-	str := strconv.Itoa(node.Val)
+	str := "{" + strconv.Itoa(node.Val)
 	node = node.Next
-	for {
-		if node == nil {
-			break
-		}
+	count := 0
+	for node != nil {
 		str = str + "," + strconv.Itoa(node.Val)
 		node = node.Next
+		count++
+		if count > 10000 {
+			println("链表过长，考虑是否成环")
+			break
+		}
 	}
-	return str
+	return str + "}"
 }

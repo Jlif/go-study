@@ -7,8 +7,11 @@ type ListNode = data_structure.ListNode
 func reverseLinkedList(head *ListNode) *ListNode {
 	var pre *ListNode
 	cur := head
-	for cur.Next != nil {
-		pre.Next = cur
+	for cur != nil {
+		tmp := cur.Next
+		cur.Next = pre
+		pre = cur
+		cur = tmp
 	}
-
+	return pre
 }

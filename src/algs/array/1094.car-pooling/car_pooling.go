@@ -1,5 +1,7 @@
 package _094_car_pooling
 
+import "tech.jiangchen/go-study/src/algs/data_structure"
+
 /**
 车上最初有capacity个空座位。车只能向一个方向行驶（也就是说，不允许掉头或改变方向）
 
@@ -12,12 +14,14 @@ package _094_car_pooling
 0 <= fromi < toi <= 1000
 */
 
-func CarPooling(trips [][]int, capacity int) bool {
-	diff := constructDiff(make([]int, 1001))
+func carPooling(trips [][]int, capacity int) bool {
+	diff := data_structure.ConstructDiff(make([]int, 10))
 	for _, v := range trips {
-		diff.increment(v[1], v[2], v[0])
+		// 注意这个减一，第 trip[2] 站乘客已经下车，
+		// 即乘客在车上的区间是 [trip[1], trip[2] - 1]
+		diff.Increment(v[1], v[2]-1, v[0])
 	}
-	result := diff.getResult()
+	result := diff.GetResult()
 
 	for _, v := range result {
 		if v > capacity {
@@ -25,34 +29,4 @@ func CarPooling(trips [][]int, capacity int) bool {
 		}
 	}
 	return true
-}
-
-type Diff struct {
-	diff []int
-}
-
-// 输入原始数组，返回差分数组
-func constructDiff(source []int) Diff {
-	diff := make([]int, len(source))
-	diff[0] = source[0]
-	for i := 1; i < len(source); i++ {
-		diff[i] = source[i] - source[i-1]
-	}
-	return Diff{diff: diff}
-}
-
-func (d Diff) increment(i int, j int, val int) {
-	d.diff[i] += val
-	if j+1 < len(d.diff) {
-		d.diff[j+1] -= val
-	}
-}
-
-func (d Diff) getResult() []int {
-	res := make([]int, len(d.diff))
-	res[0] = d.diff[0]
-	for i := 1; i < len(d.diff); i++ {
-		res[i] = res[i-1] + d.diff[i]
-	}
-	return res
 }

@@ -22,11 +22,13 @@ type ans1094 struct {
 func TestCarPooling(t *testing.T) {
 
 	cases := []question1094{
-		{para1094{trips: [][]int{{2, 1, 5}, {3, 5, 7}}, capacity: 4}, ans1094{false}},
+		{para1094{trips: [][]int{{2, 1, 5}, {3, 3, 7}}, capacity: 4}, ans1094{false}},
+		{para1094{trips: [][]int{{2, 1, 5}, {3, 3, 7}}, capacity: 5}, ans1094{true}},
+		{para1094{trips: [][]int{{2, 1, 5}, {3, 5, 7}}, capacity: 3}, ans1094{true}},
 	}
 
 	for _, v := range cases {
-		assert.New(t).Equal(CarPooling(v.para1094.trips, v.para1094.capacity), v.ans)
+		assert.New(t).Equal(carPooling(v.para1094.trips, v.para1094.capacity), v.ans)
 	}
 
 }

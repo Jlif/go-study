@@ -28,7 +28,7 @@ func TestCarPooling(t *testing.T) {
 	}
 
 	for _, v := range cases {
-		assert.New(t).Equal(carPooling(v.para1094.trips, v.para1094.capacity), v.ans)
+		assert.New(t).Equal(v.ans, carPooling(v.para1094.trips, v.para1094.capacity))
 	}
 
 }

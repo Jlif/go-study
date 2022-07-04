@@ -21,11 +21,12 @@ type ans struct {
 func Test(t *testing.T) {
 
 	cases := []question{
-		{param{"😁哈哈"}, ans{1}},
+		{param{"😁哈哈"}, ans{2}},
+		{param{"abcabcbb"}, ans{3}},
 	}
 
 	for _, v := range cases {
-		assert.New(t).Equal(lengthOfLongestSubstring(v.param.s), v.ans.ans)
+		assert.New(t).Equal(v.ans.ans, lengthOfLongestSubstring(v.param.s))
 	}
 
 }

@@ -11,10 +11,10 @@ package _576_permutation_in_string
 */
 
 func checkInclusion(s1 string, s2 string) bool {
-	set := make(map[rune]int)
-	window := make(map[rune]int)
+	set := make(map[rune]bool)
+	window := make(map[rune]bool)
 	for _, v := range []rune(s1) {
-		set[v] = 0
+		set[v] = true
 	}
 
 	left, right, valid := 0, 0, 0
@@ -25,7 +25,7 @@ func checkInclusion(s1 string, s2 string) bool {
 		right++
 		//进行窗口内数据的一系列更新
 		if _, exist := set[r]; exist {
-			window[r]++
+			window[r] = true
 			if window[r] == set[r] {
 				valid++
 			}
@@ -37,14 +37,14 @@ func checkInclusion(s1 string, s2 string) bool {
 			if valid == len(set) {
 				return true
 			}
-			d := src[left]
+			l := src[left]
 			left++
 			//进行窗口内的一系列数据更新
-			if _, exist := set[d]; exist {
-				if window[d] == set[d] {
+			if _, exist := set[l]; exist {
+				if window[l] == set[l] {
 					valid--
 				}
-				window[d]--
+				window[l] = false
 			}
 		}
 	}

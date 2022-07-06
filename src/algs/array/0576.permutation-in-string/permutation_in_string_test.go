@@ -24,6 +24,8 @@ func Test(t *testing.T) {
 	cases := []question{
 		{param{"ab", "eidbaooo"}, ans{true}},
 		{param{"ab", "eidboaoo"}, ans{false}},
+		{param{"hello", "ooolleoooleh"}, ans{false}},
+		{param{"abcdxabcde", "abcdeabcdx"}, ans{true}},
 	}
 
 	for _, v := range cases {

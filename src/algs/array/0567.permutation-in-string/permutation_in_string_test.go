@@ -1,4 +1,4 @@
-package _576_permutation_in_string
+package _567_permutation_in_string
 
 import (
 	"github.com/stretchr/testify/assert"

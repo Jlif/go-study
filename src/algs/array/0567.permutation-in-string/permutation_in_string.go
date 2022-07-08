@@ -1,4 +1,4 @@
-package _576_permutation_in_string
+package _567_permutation_in_string
 
 /**
 给你两个字符串s1和s2 ，写一个函数来判断 s2 是否包含 s1的排列。如果是，返回 true ；否则，返回 false 。
@@ -32,7 +32,7 @@ func checkInclusion(s1 string, s2 string) bool {
 		}
 
 		//判断左侧窗口是否要收缩
-		for right-left >= len(set) {
+		for right-left >= len([]rune(s1)) {
 			//在这里判断是否找到了合法子串
 			if valid == len(set) {
 				return true

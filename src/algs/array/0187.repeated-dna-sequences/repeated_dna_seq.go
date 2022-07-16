@@ -27,9 +27,9 @@ func findRepeatedDnaSequences(s string) []string {
 	left, right := 0, 0
 	var res []string
 	resMap := map[string]struct{}{}
-	seek := map[int]bool{}
+	seek := map[int32]bool{}
 
-	tmp := 0
+	var tmp int32 = 0
 	for right < len(arr) {
 		tmp = addNewStr(tmp, arr[right])
 		right++
@@ -51,9 +51,9 @@ func findRepeatedDnaSequences(s string) []string {
 	return res
 }
 
-func addNewStr(num int, b byte) int {
+func addNewStr(num int32, b byte) int32 {
 	num = num << 2
 	num = num & 0xfffff
-	num = num | int(b)
+	num = num | int32(b)
 	return num
 }

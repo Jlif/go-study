@@ -1,6 +1,8 @@
 package _710_random_pick_with_blacklist
 
-import "math/rand"
+import (
+	"math/rand"
+)
 
 /*
 *
@@ -24,20 +26,26 @@ type Solution struct {
 }
 
 func Constructor(n int, blacklist []int) Solution {
-	w := make([]int, n-len(blacklist))
+	w := make([]int, n)
+	for i := 0; i < n; i++ {
+		w[i] = i
+	}
 	blackMap := map[int]struct{}{}
 	for _, val := range blacklist {
 		blackMap[val] = struct{}{}
 	}
-	tmp := 0
-	for i := 0; i < n; i++ {
-		if _, exist := blackMap[i]; exist {
-			continue
+
+	left, right := 0, n-1
+	for right >= n-len(blacklist) {
+		if _, exist := blackMap[right]; exist {
+			right--
+		} else if _, exist2 := blackMap[left]; exist2 {
+			w[left], w[right] = w[right], w[left]
+			right--
 		}
-		w[tmp] = i
-		tmp++
 	}
-	return Solution{w}
+
+	return Solution{w[0 : n-len(blacklist)]}
 }
 
 func (this *Solution) Pick() int {

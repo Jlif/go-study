@@ -30,17 +30,32 @@ func Constructor(n int, blacklist []int) Solution {
 	for i := 0; i < n; i++ {
 		w[i] = i
 	}
-	blackMap := map[int]struct{}{}
+	if len(blacklist) == 0 {
+		return Solution{w}
+	}
+
+	blackMap := map[int]bool{}
 	for _, val := range blacklist {
-		blackMap[val] = struct{}{}
+		blackMap[val] = true
 	}
 
 	left, right := 0, n-1
-	for right >= n-len(blacklist) {
-		if _, exist := blackMap[right]; exist {
+	for left < right {
+		_, existRight := blackMap[w[right]]
+		for existRight {
 			right--
-		} else if _, exist2 := blackMap[left]; exist2 {
+			_, existRight = blackMap[w[right]]
+		}
+
+		_, existLeft := blackMap[w[left]]
+		for !existLeft && left < right {
+			left++
+			_, existLeft = blackMap[w[left]]
+		}
+
+		if left < right {
 			w[left], w[right] = w[right], w[left]
+			left++
 			right--
 		}
 	}

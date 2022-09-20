@@ -30,9 +30,9 @@ type Solution struct {
 func Constructor(n int, blacklist []int) Solution {
 	sort.Ints(blacklist)
 
-	blackMap := map[int]bool{}
+	blackMap := make(map[int]struct{}, len(blacklist))
 	for _, val := range blacklist {
-		blackMap[val] = true
+		blackMap[val] = struct{}{}
 	}
 
 	arr := make([]int, 0, len(blacklist))
@@ -42,7 +42,7 @@ func Constructor(n int, blacklist []int) Solution {
 		}
 	}
 
-	leftMap := map[int]int{}
+	leftMap := make(map[int]int, len(blacklist))
 	idx := 0
 	for _, val := range blacklist {
 		if val < n-len(blacklist) {

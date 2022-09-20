@@ -2,6 +2,7 @@ package _710_random_pick_with_blacklist
 
 import (
 	"math/rand"
+	"sort"
 )
 
 /*
@@ -22,47 +23,41 @@ int pick()返回一个范围为 [0, n - 1] 且不在黑名单blacklist 中的随
 */
 
 type Solution struct {
-	w []int
+	m map[int]int
+	h int
 }
 
 func Constructor(n int, blacklist []int) Solution {
-	w := make([]int, n)
-	for i := 0; i < n; i++ {
-		w[i] = i
-	}
-	if len(blacklist) == 0 {
-		return Solution{w}
-	}
+	sort.Ints(blacklist)
 
 	blackMap := map[int]bool{}
 	for _, val := range blacklist {
 		blackMap[val] = true
 	}
 
-	left, right := 0, n-1
-	for left < right {
-		_, existRight := blackMap[w[right]]
-		for existRight {
-			right--
-			_, existRight = blackMap[w[right]]
-		}
-
-		_, existLeft := blackMap[w[left]]
-		for !existLeft && left < right {
-			left++
-			_, existLeft = blackMap[w[left]]
-		}
-
-		if left < right {
-			w[left], w[right] = w[right], w[left]
-			left++
-			right--
+	arr := make([]int, 0, len(blacklist))
+	for i := n; i > n-len(blacklist); i-- {
+		if _, exist := blackMap[i-1]; !exist {
+			arr = append(arr, i-1)
 		}
 	}
 
-	return Solution{w[0 : n-len(blacklist)]}
+	leftMap := map[int]int{}
+	idx := 0
+	for _, val := range blacklist {
+		if val < n-len(blacklist) {
+			leftMap[val] = arr[idx]
+			idx++
+		}
+	}
+
+	return Solution{leftMap, n - len(blacklist)}
 }
 
 func (this *Solution) Pick() int {
-	return this.w[rand.Intn(len(this.w))]
+	tmp := rand.Intn(this.h)
+	if val, exist := this.m[tmp]; exist {
+		return val
+	}
+	return tmp
 }

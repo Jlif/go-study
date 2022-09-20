@@ -21,13 +21,13 @@ type ans struct {
 func Test(t *testing.T) {
 
 	cases := []question{
-		//{param{7, []int{2, 3, 5}}, ans{}},
+		{param{7, []int{2, 3, 5}}, ans{}},
 		//{param{3, []int{2}}, ans{}},
 		//{param{4, []int{0, 3, 1}}, ans{}},
 		//{param{4, []int{2, 1}}, ans{}},
 		//{param{2, []int{}}, ans{}},
 		//{param{4, []int{0}}, ans{}},
-		{param{1000000000, []int{640145908}}, ans{}},
+		//{param{1000000000, []int{640145908}}, ans{}},
 	}
 
 	for _, v := range cases {
